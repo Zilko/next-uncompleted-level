@@ -9,6 +9,7 @@ void ProEndLevelLayer::onNextLevel(CCObject*) {
     }
 
     Manager::get().goingToLevel = f->m_nextLevel;
+    Manager::get().transitionCount = 0;
     Manager::setHookEnabled("cocos2d::CCTransitionFade::create", true);
 
     onMenu(nullptr);

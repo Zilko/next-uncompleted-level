@@ -16,6 +16,7 @@ public:
     bool shouldLinkInfoLayer = false;
 
     int skippedPages = 0;
+    int transitionCount = 0;
 
     static Manager& get();
     
