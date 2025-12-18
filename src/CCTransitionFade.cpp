@@ -7,7 +7,7 @@ CCTransitionFade* ProCCTransitionFade::create(float time, CCScene* scene) {
     if (++Manager::get().transitionCount >= 4) {
         didTroll = true;
         Manager::get().goingToLevel = nullptr;
-        setHookEnabled("cocos2d::CCTransitionFade::create", false);
+        Manager::setHookEnabled("cocos2d::CCTransitionFade::create", false);
     }
 
     if (Manager::get().goingToLevel) {
