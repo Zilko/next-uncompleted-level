@@ -1,0 +1,33 @@
+{
+	"geode": "4.10.0",
+	"gd": {
+		"win": "2.2074",
+		"android": "2.2074",
+		"mac": "2.2074",
+		"ios": "2.2074"
+	},
+	"id": "zilko.next_uncompleted_level",
+	"name": "Next Uncompleted Level",
+	"version": "v1.0.0",
+	"developer": "Zilko",
+	"description": "it nexts your uncompleted level",
+	"links": {
+		"source": "https://github.com/Zilko/next-uncompleted-level",
+		"community": "https://discord.gg/24wtc8wEBP"
+	},
+	"dependencies": {
+		"geode.node-ids": {
+ 			"version": ">=1.20.1",
+ 			"importance": "required"
+		},
+		"cvolton.level-id-api": {
+ 			"version": ">=1.1.0",
+ 			"importance": "required"
+		}
+	},
+	"resources": {
+		"sprites": [
+			"resources/*.png"
+		]
+	}
+}
