@@ -41,6 +41,10 @@ void ProEndLevelLayer::customSetup() {
     if (!m.currentLayer) {
         return;
     }
+
+    if (Mod::get()->getSettingValue<bool>("disable")) {
+        return;
+    }
     
     auto levels = Manager::getLevelsArray(m.currentLayer);
     auto nextLevel = Manager::findNextLevel(levels, m_playLayer->m_level);

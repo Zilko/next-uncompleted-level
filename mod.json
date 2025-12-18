@@ -29,5 +29,13 @@
 		"sprites": [
 			"resources/*.png"
 		]
+	},
+	"settings": {
+		"disable": {
+			"name": "Disable",
+			"description": "Disables",
+			"type": "bool",
+			"default": false
+		}
 	}
 }
