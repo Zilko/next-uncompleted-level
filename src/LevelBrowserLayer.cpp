@@ -81,7 +81,8 @@ void ProLevelBrowserLayer::loadLevelsFinished(CCArray* p0, const char* p1, int p
                     onPrevPage(nullptr);
                 }
 
-                auto endLayer = static_cast<ProEndLevelLayer*>(f->m_endLayer);
+                EndLevelLayer* l = f->m_endLayer;
+                auto endLayer = static_cast<ProEndLevelLayer*>(l);
                 endLayer->m_fields->m_nextLevel = nextLevel;
                 endLayer->setButtonEnabled(true);
 
@@ -105,7 +106,8 @@ void ProLevelBrowserLayer::loadLevelsFinished(CCArray* p0, const char* p1, int p
             return;
         }
 
-        auto endLayer = static_cast<ProEndLevelLayer*>(f->m_endLayer);
+        EndLevelLayer* l = f->m_endLayer;
+        auto endLayer = static_cast<ProEndLevelLayer*>(l);
         
         if (nextLevel) {
             endLayer->m_fields->m_nextLevel = nextLevel;
