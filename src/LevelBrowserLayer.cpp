@@ -23,9 +23,15 @@ void ProLevelBrowserLayer::onEnterTransitionDidFinish() {
             self->onNextPage(nullptr);
             att++;
         }
+        
+        auto& m = Manager::get();
 
+        m.shouldAutoOpen = true;
+        
         GameLevelManager::get()->gotoLevelPage(Manager::get().goingToLevel);
-        Manager::get().goingToLevel = nullptr;
+        
+        m.goingToLevel = nullptr;
+        
         Manager::setHookEnabled("cocos2d::CCTransitionFade::create", false);
     });
 }

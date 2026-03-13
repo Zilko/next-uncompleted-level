@@ -2,7 +2,7 @@
 
 void ProLevelInfoLayer::onEnterTransitionDidFinish() {
     LevelInfoLayer::onEnterTransitionDidFinish();
-
+    
     if (Manager::get().goingToLevel) {
         Loader::get()->queueInMainThread([self = Ref(this)] {
             self->onBack(nullptr);
@@ -12,7 +12,7 @@ void ProLevelInfoLayer::onEnterTransitionDidFinish() {
 
 bool ProLevelInfoLayer::init(GJGameLevel* level, bool challenge) {
     auto& m = Manager::get();
-
+    
     if (!LevelInfoLayer::init(level, challenge)) {
         m.shouldLinkInfoLayer = false;
         m.currentLinkLayer = nullptr;
