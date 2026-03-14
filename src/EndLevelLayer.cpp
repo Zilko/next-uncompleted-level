@@ -1,7 +1,8 @@
 #include "EndLevelLayer.hpp"
 #include "LevelBrowserLayer.hpp"
+#include "NextButton.hpp"
 
-void ProEndLevelLayer::onNextLevel(CCObject*) {
+void ProEndLevelLayer::onNextLevel() {
     auto f = m_fields.self();
 
     if (!f->m_nextLevel) {
@@ -18,18 +19,8 @@ void ProEndLevelLayer::onNextLevel(CCObject*) {
 void ProEndLevelLayer::setButtonEnabled(bool enabled) {
     auto f = m_fields.self();
 
-    if (!f->m_button) {
-        return;
-    }
-
-    f->m_button->setEnabled(enabled);
-    f->m_spr1->setOpacity(enabled ? 255 : 0);
-    f->m_spr2->setVisible(!enabled);
-    f->m_spr3->setVisible(!enabled);
-    
-    if (f->m_loadingCircle) {
-        f->m_loadingCircle->removeFromParentAndCleanup(true);
-        f->m_loadingCircle = nullptr;
+    if (f->m_button) {
+        f->m_button->setEnabled(enabled);
     }
 }
 
@@ -46,35 +37,21 @@ void ProEndLevelLayer::customSetup() {
         return;
     }
     
+    auto menu = m_mainLayer->getChildByID("button-menu");
+
+    if (!menu) {
+        return;
+    }
+
     auto levels = Manager::getLevelsArray(m.currentLayer);
     auto nextLevel = Manager::findNextLevel(levels, m_playLayer->m_level);
     auto f = m_fields.self();
 
-    auto spr = CCSprite::createWithSpriteFrameName("GJ_plainBtn_001.png");
-
-    f->m_spr2 = CCSpriteGrayscale::createWithSpriteFrameName("GJ_plainBtn_001.png");
-    f->m_spr2->setAnchorPoint({0, 0});
-    f->m_spr2->setColor({85, 85, 85});
-
-    spr->addChild(f->m_spr2);
-
-    f->m_spr1 = CCSprite::create("arrows.png"_spr);
-    f->m_spr1->setPosition(spr->getContentSize() / 2.f + ccp(2, -1));
-
-    spr->addChild(f->m_spr1);
-
-    f->m_spr3 = CCSpriteGrayscale::create("arrows.png"_spr);
-    f->m_spr3->setAnchorPoint({0, 0});
-    f->m_spr3->setColor({85, 85, 85});
-    f->m_spr3->setOpacity(141);
-
-    f->m_spr1->addChild(f->m_spr3);
-
-    f->m_button = CCMenuItemSpriteExtra::create(spr, this, menu_selector(ProEndLevelLayer::onNextLevel));
+    f->m_button = NextButton::create([this](Button*) {
+        onNextLevel();
+    });
     f->m_button->setPosition(180, -125);
     f->m_button->setID("next-level-btn"_spr);
-
-    auto menu = m_mainLayer->getChildByID("button-menu");
 
     menu->addChild(f->m_button);
     
@@ -130,13 +107,7 @@ void ProEndLevelLayer::customSetup() {
         ff->m_allowedAttempts = 3;
         ff->m_currentLevel = m_playLayer->m_level;
 
-        f->m_loadingCircle = CCSprite::create("loadingCircle.png");
-        f->m_loadingCircle->setPosition(spr->getContentSize() / 2.f);
-        f->m_loadingCircle->setOpacity(138);
-        f->m_loadingCircle->setScale(0.425f);
-        f->m_loadingCircle->runAction(CCRepeatForever::create(CCRotateBy::create(1.f, 360.f)));
-
-        f->m_button->addChild(f->m_loadingCircle);
+        f->m_button->addLoadingCircle();
 
         break;
     }

@@ -26,10 +26,11 @@ void ProLevelBrowserLayer::onEnterTransitionDidFinish() {
         
         auto& m = Manager::get();
 
-        m.shouldAutoOpen = true;
+        m.shouldAutoOpen = Mod::get()->getSettingValue<bool>("auto-open");
         
         GameLevelManager::get()->gotoLevelPage(Manager::get().goingToLevel);
         
+        m.shouldAutoOpen = false;
         m.goingToLevel = nullptr;
         
         Manager::setHookEnabled("cocos2d::CCTransitionFade::create", false);

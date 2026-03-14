@@ -14,7 +14,7 @@ public:
     std::unordered_map<int, std::vector<LevelBrowserLayer*>> browserLayersForID;
     
     bool shouldLinkInfoLayer = false;
-    bool shouldAutoOpen = true;
+    bool shouldAutoOpen = false;
 
     int skippedPages = 0;
     int transitionCount = 0;
