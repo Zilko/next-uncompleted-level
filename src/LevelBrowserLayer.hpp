@@ -12,7 +12,9 @@ class $modify(ProLevelBrowserLayer, LevelBrowserLayer) {
         
         GJGameLevel* m_currentLevel = nullptr;
 
-        Ref<EndLevelLayer> m_endLayer = nullptr;
+        // Ref<EndLevelLayer> m_endLayer = nullptr;
+
+        bool m_isSearching = false;
         
         int m_skippedPages = 0;
         int m_allowedAttempts = 0;

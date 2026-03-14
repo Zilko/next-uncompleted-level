@@ -102,7 +102,7 @@ void ProEndLevelLayer::customSetup() {
         
         auto ff = static_cast<ProLevelBrowserLayer*>(m.currentLayer)->m_fields.self();
         
-        ff->m_endLayer = this;
+        ff->m_isSearching = true;
         ff->m_skippedPages = skippedPages;
         ff->m_allowedAttempts = 3;
         ff->m_currentLevel = m_playLayer->m_level;

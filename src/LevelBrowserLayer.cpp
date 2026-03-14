@@ -42,7 +42,7 @@ void ProLevelBrowserLayer::loadLevelsFinished(CCArray* p0, const char* p1, int p
     
     auto f = m_fields.self();
     
-    if (f->m_allowedAttempts <= 0 || !f->m_endLayer) {
+    if (f->m_allowedAttempts <= 0 || !f->m_isSearching) {
         return;
     }
     
@@ -67,7 +67,7 @@ void ProLevelBrowserLayer::loadLevelsFinished(CCArray* p0, const char* p1, int p
                     }
 
                     f->m_skippedPages = 0;
-                    f->m_endLayer = nullptr;
+                    f->m_isSearching = false;
                     f->m_currentLevel = nullptr;
                     
                     Notification::create("Reached end of pages.")->show();
@@ -94,7 +94,7 @@ void ProLevelBrowserLayer::loadLevelsFinished(CCArray* p0, const char* p1, int p
                 endLayer->setButtonEnabled(true);
 
                 f->m_skippedPages = 0;
-                f->m_endLayer = nullptr;
+                f->m_isSearching = false;
                 f->m_currentLevel = nullptr;
                 
                 return;
@@ -109,7 +109,7 @@ void ProLevelBrowserLayer::loadLevelsFinished(CCArray* p0, const char* p1, int p
             onPrevPage(nullptr);
         }
 
-        if (!f->m_endLayer) {
+        if (!f->m_isSearching) {
             return;
         }
 
@@ -125,7 +125,7 @@ void ProLevelBrowserLayer::loadLevelsFinished(CCArray* p0, const char* p1, int p
         }
 
         f->m_skippedPages = 0;
-        f->m_endLayer = nullptr;
+        f->m_isSearching = false;
         f->m_currentLevel = nullptr;
     }
 }
@@ -141,6 +141,6 @@ void ProLevelBrowserLayer::loadLevelsFailed(const char* p0, int p1) {
     
     f->m_skippedPages = 0;
     f->m_allowedAttempts = 0;
-    f->m_endLayer = nullptr;
+    f->m_isSearching = false;
     f->m_currentLevel = nullptr;
 }
